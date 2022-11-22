@@ -1,0 +1,68 @@
+{% extends 'products/layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  <form action="{% url 'search' %}" class="d-flex container" method="GET" align="center"  >
+        <input name="search" align="center" type="search" placeholder="Search" aria-label="Search">
+       <button type="button" class="btn btn-success">Search</button>
+      </form>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    {% for msg in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Hey!</strong> {{ msg }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                    <div class="card-header">
+                        <h3 class="fw-bold">Shop All Our Photos</h3>
+
+                   {% for p in products %}
+                         </br>
+                         </br>
+                        <div class="card">
+    <div class="card-horizontal">
+
+        <div class="card-body">
+            <h4 class="card-title">{{ p.name }}</h4>
+            <p class="card-text">{{ p.description }}</p>
+             {% if p.image %}
+             <div class="img-square-wrapper" max-width="850px" max-height="450px">
+            <img class="" src="{{ p.image.url }}"  alt="No Image found"  max-width="850px" max-height="450px">
+        </div>
+            <p>{{ p.tags }} </p>
+            {% else %}
+            <p>
+                 <div class="img-square-wrapper">
+            <img class="" src="{% static 'images/logo.png' %}" alt="Card image cap">
+        </div>
+            </p>
+            <p>{{ p.tags }} </p>
+            {% endif %}
+            <p>
+                <a href="{% url 'edit-prod' p.id %}" class="button-1" >EDIT</a>
+                <a href="{% url 'delete-prod' p.id %}" class="button-2">Delete</a>
+            </p>
+        </div>
+    </div>
+</div>
+                    <br>
+                    <br>
+                    <br>
+                    {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
