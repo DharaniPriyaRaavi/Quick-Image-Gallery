@@ -8,6 +8,8 @@
             <img src="{% static 'images/logo.jpg' %}" alt="" width="10%" height="10%" class="d-inline-block align-text-top">
             Quick Photo Gallery App
           </a>
+
+                    {% if request.user.is_authenticated %}
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url '/' %}">Home</a>
@@ -18,8 +20,29 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">About Us</a>
                         </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
 
                     </ul>
+               {% else %}
+
+                     <ul class="navbar-nav ms-auto">
+                         </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                        </li>
+
+                    </ul>
+                {% endif %}
                 </div>
             </div>
         </nav>

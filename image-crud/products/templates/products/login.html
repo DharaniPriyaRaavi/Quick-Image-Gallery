@@ -1,0 +1,29 @@
+<! DOCTYPE html>
+{% extends 'products/layouts/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Log in</h2><br />
+<form action="{% url 'login' %}" method="post">
+
+            <label for="username"><b>Username</b></label> <br /><br />
+            <input type="text" placeholder="Enter Username" name="username" required><br /><br />
+            <label for="password"><b>Password</b></label><br /><br />
+            <input type="password" placeholder="Enter Password" name="password" required><br /><br />
+            {% csrf_token %}
+            {{ form|crispy }}
+	    {% if request.GET.next %}
+            	<input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Log in</button><br /><br />
+            <a href="" class="btn btn-link">Forgot your password?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

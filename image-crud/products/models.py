@@ -1,8 +1,11 @@
-from django.db import models
+
 # Create your models here.
-import datetime
 import os
-from django.urls import reverse
+
+from django.db import models
+import datetime
+from django.contrib.auth.models import User
+
 
 
 def filepath(request, filename):
@@ -16,7 +19,6 @@ class Item(models.Model):
     price = models.TextField(max_length=50)
     description = models.TextField(max_length=500, null=True)
     image = models.ImageField(upload_to=filepath, null=True, blank=True)
-
     tags = models.TextField()
 
     def __str__(self):
@@ -24,3 +26,20 @@ class Item(models.Model):
 
     class Meta:
         ordering = ('-id',)
+
+
+class Member(User):
+    Username = models.CharField(max_length=300, blank=False, default="Test")
+    Email = models.CharField(max_length=300, blank=True)
+    Password = models.CharField(max_length=300, blank=False,default="Test@123")
+    Password_confirmation = models.CharField(max_length=300, blank=False,default="Test@123")
+    address = models.CharField(max_length=300, blank=True)
+    city = models.CharField(max_length=20, default='Windsor')
+    province = models.CharField(max_length=2, default='ON')
+    picture = models.ImageField(
+        upload_to='static/profileimg',
+        blank=True, null=True
+    )
+    def __str__(self):
+        return self.username
+
